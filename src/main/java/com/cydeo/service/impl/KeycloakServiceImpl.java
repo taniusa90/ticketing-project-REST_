@@ -22,7 +22,7 @@ import static org.keycloak.admin.client.CreatedResponseUtil.getCreatedId;
 public class KeycloakServiceImpl implements KeycloakService {
 
 
-    private final KeycloakProperties keycloakProperties;
+    private final KeycloakProperties keycloakProperties;//di,to use variables
 
     public KeycloakServiceImpl(KeycloakProperties keycloakProperties) {
         this.keycloakProperties = keycloakProperties;
@@ -34,7 +34,7 @@ public class KeycloakServiceImpl implements KeycloakService {
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
         credential.setTemporary(false);
-        credential.setValue(userDTO.getPassWord());//we set the password to the user keycloak
+        credential.setValue(userDTO.getPassWord());//assigned the password to the user password keycloak
 
         UserRepresentation keycloakUser = new UserRepresentation();//everything that is coming from keycloak
         keycloakUser.setUsername(userDTO.getUserName());
@@ -84,7 +84,7 @@ public class KeycloakServiceImpl implements KeycloakService {
         keycloak.close();
     }
 
-    private Keycloak getKeycloakInstance(){
+    private Keycloak getKeycloakInstance(){//we create a instance
         return Keycloak.getInstance(keycloakProperties.getAuthServerUrl(),
                 keycloakProperties.getMasterRealm(), keycloakProperties.getMasterUser()
                 , keycloakProperties.getMasterUserPswd(), keycloakProperties.getMasterClient());

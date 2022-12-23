@@ -38,7 +38,7 @@ public class ProjectDTO {
     private String projectDetail;
 
     private Status projectStatus;
-   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+   @JsonProperty(access = JsonProperty.Access.READ_ONLY)//when I retrieve I need to see
     private int completeTaskCounts;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int unfinishedTaskCounts;

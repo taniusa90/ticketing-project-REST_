@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @DefaultExceptionMessage(defaultMessage = "Failed to delete user")
-    public void delete(String username) throws TicketingProjectException {
+    public void delete(String username) throws TicketingProjectException {//checked exception
 
         User user = userRepository.findByUserNameAndIsDeleted(username, false);
 

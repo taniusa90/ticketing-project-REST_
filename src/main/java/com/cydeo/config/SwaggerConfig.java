@@ -50,7 +50,7 @@ public class SwaggerConfig {
         OAuthFlow flow = createAuthorizationCodeFlow();
 
         return new OAuthFlows()
-                .authorizationCode(flow);
+                .authorizationCode(flow);//we describe what grant type we are using
     }
 
     private OAuthFlow createAuthorizationCodeFlow() {
