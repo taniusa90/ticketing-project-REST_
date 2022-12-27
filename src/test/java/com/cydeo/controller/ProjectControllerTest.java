@@ -42,7 +42,6 @@ class ProjectControllerTest {
     static void setUp() {
 
         token = "Bearer " + getToken();
-
         manager = new UserDTO(2L,
                 "",
                 "",
@@ -94,7 +93,7 @@ class ProjectControllerTest {
                         .header("Authorization", token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .content(toJsonString(project)))
+                        .content(toJsonString(project)))//request body
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message").value("Project is successfully created"));
 
@@ -105,7 +104,7 @@ class ProjectControllerTest {
 
         project.setProjectName("API Project-2");
 
-        mvc.perform(MockMvcRequestBuilders.put("/api/v1/project")
+        mvc.perform(MockMvcRequestBuilders.put("/api/v1/project")//we send my new project name
                         .header("Authorization", token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -118,18 +117,18 @@ class ProjectControllerTest {
     @Test
     void givenToken_deleteProject() throws Exception {
 
-        mvc.perform(MockMvcRequestBuilders.delete("/api/v1/project/" + project.getProjectCode())
+        mvc.perform(MockMvcRequestBuilders.delete("/api/v1/project/" + project.getProjectCode())//we are deleting based an projectCode
                         .header("Authorization", token)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("Project is successfully deleted"));
+                .andExpect(status().isOk())//is verifying
+                .andExpect(jsonPath("$.message").value("Project is successfully deleted"));//is verifying
 
     }
 
     private String toJsonString(final Object obj) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.registerModule(new JavaTimeModule());//2022,12,12->2022/12/12
         return objectMapper.writeValueAsString(obj);
     }
 
@@ -142,7 +141,7 @@ class ProjectControllerTest {
 
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
 
-        map.add("grant_type", "password");
+        map.add("grant_type", "password");//contain all the info from Keycloak
         map.add("client_id", "ticketing-app");
         map.add("client_secret", "kOaOFAcZuS9Ym2EcNURaIVG4nUZvVA5d");
         map.add("username", "ozzy");
